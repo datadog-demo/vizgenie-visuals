@@ -1,77 +1,85 @@
 
-import { Github, Rocket } from "lucide-react";
+import { Github, Rocket, ArrowUpRight } from "lucide-react";
 import { Card } from "./ui/card";
 
-const MinimalistPoster = ({ variant }: { variant: 1 | 2 }) => {
+const MinimalistPoster = () => {
   const content = {
-    1: {
-      platform: "Product Hunt",
-      heading: "VizGenie",
-      tagline: "Data Visualization Made Simple",
-      description: "Transform natural language to Grafana dashboards",
-      color: "bg-gradient-to-br from-[#FDE1D3] to-[#FFE29F]",
-      icon: Rocket,
-      link: "https://www.producthunt.com/vizgenie",
-      features: ["Natural Language Input", "Auto Dashboard Creation", "AI-Powered"],
-      launched: "April 18, 2025",
-    },
-    2: {
-      platform: "GitHub",
-      heading: "VizGenie",
-      tagline: "Open Source Intelligence",
-      description: "AI-powered Grafana visualization tool",
-      color: "bg-gradient-to-br from-[#E5DEFF] to-[#D6BCFA]",
-      icon: Github,
-      link: "https://github.com/vizgenie",
-      features: ["Prometheus Support", "Extensible Architecture", "Multi-Source"],
-      launched: "April 18, 2025",
-    },
+    heading: "VizGenie",
+    tagline: "Data Visualization Made Simple",
+    description: "Transform natural language to Grafana dashboards",
+    color: "bg-gradient-to-br from-[#8B5CF6] via-[#D946EF] to-[#F97316]",
+    platforms: [
+      {
+        name: "Product Hunt",
+        icon: Rocket,
+        link: "https://www.producthunt.com/vizgenie",
+      },
+      {
+        name: "GitHub",
+        icon: Github,
+        link: "https://github.com/vizgenie",
+      }
+    ],
+    features: ["Natural Language Input", "Auto Dashboard Creation", "AI-Powered", "Prometheus Support"],
+    launched: "April 18, 2025",
   };
 
-  const selected = content[variant];
-
   return (
-    <Card className={`${selected.color} p-8 relative overflow-hidden min-h-[600px] flex flex-col justify-between group hover:shadow-lg transition-shadow duration-300`}>
-      <div className="space-y-8">
+    <Card className={`${content.color} p-8 relative overflow-hidden min-h-[400px] flex flex-col justify-between group hover:shadow-xl transition-all duration-500`}>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-black/5 rounded-full blur-3xl transform translate-x-1/2 translate-y-1/2" />
+      
+      <div className="space-y-8 relative z-10">
         <div className="flex items-start justify-between">
           <div className="relative">
             <img 
               src="/lovable-uploads/207d3f1c-58b3-4244-85de-55101fc15c3e.png" 
               alt="VizGenie Logo" 
-              className="h-10 object-contain transform transition-transform duration-300 group-hover:scale-105"
+              className="h-12 object-contain transform transition-transform duration-300 group-hover:scale-105"
             />
-            <div className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-gray-700 to-transparent opacity-20" />
+            <div className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-white to-transparent opacity-30" />
           </div>
-          <div className="text-sm font-medium text-gray-700 bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm">
-            {selected.platform}
+          <div className="flex gap-3">
+            {content.platforms.map((platform, index) => (
+              <a
+                key={index}
+                href={platform.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-white/90 hover:text-white bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm transition-all duration-300 hover:bg-white/20"
+              >
+                <platform.icon className="w-5 h-5" />
+                <span className="text-sm font-medium">
+                  {platform.name}
+                </span>
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
+            ))}
           </div>
         </div>
-        <div className="space-y-4">
-          <h2 className="text-4xl font-bold text-gray-900 leading-tight tracking-tight">
-            {selected.tagline}
+        
+        <div className="space-y-4 max-w-2xl">
+          <h2 className="text-5xl font-bold text-white leading-tight tracking-tight">
+            {content.tagline}
           </h2>
-          <p className="text-gray-700 text-lg font-medium">{selected.description}</p>
-          <ul className="space-y-2 mt-6">
-            {selected.features.map((feature, index) => (
-              <li key={index} className="text-gray-700 text-sm flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-gradient-to-br from-gray-700 to-gray-500 rounded-full" />
+          <p className="text-white/90 text-xl font-medium">
+            {content.description}
+          </p>
+          <div className="flex flex-wrap gap-3 mt-6">
+            {content.features.map((feature, index) => (
+              <div
+                key={index}
+                className="text-white/90 text-sm px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm"
+              >
                 {feature}
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </div>
-      <div className="space-y-4">
-        <p className="text-sm text-gray-700">Published on {selected.launched}</p>
-        <a 
-          href={selected.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-gray-700 hover:text-gray-900 transition-colors duration-300"
-        >
-          <selected.icon className="w-6 h-6" />
-          <span className="text-sm font-medium">View on {selected.platform}</span>
-        </a>
+      
+      <div className="relative z-10">
+        <p className="text-sm text-white/70">Published on {content.launched}</p>
       </div>
     </Card>
   );
