@@ -1,42 +1,50 @@
 
-import { ArrowRight, Search, Database } from "lucide-react";
+import { Github, Rocket } from "lucide-react";
 import { Card } from "./ui/card";
 
 const MinimalistPoster = ({ variant }: { variant: 1 | 2 }) => {
   const content = {
     1: {
+      platform: "Product Hunt",
       heading: "VizGenie",
-      subheading: "Visualize Data Your Way",
-      description: "Natural language to Grafana visualizations",
-      color: "bg-[#E5DEFF]",
-      icon: Search,
+      tagline: "Data Visualization Made Simple",
+      description: "Transform natural language to Grafana dashboards",
+      color: "bg-[#FDE1D3]",
+      icon: Rocket,
     },
     2: {
+      platform: "GitHub",
       heading: "VizGenie",
-      subheading: "AI-Powered Insights",
-      description: "From words to dashboards, instantly",
-      color: "bg-[#FDE1D3]",
-      icon: Database,
+      tagline: "Open Source Intelligence",
+      description: "AI-powered Grafana visualization tool",
+      color: "bg-[#E5DEFF]",
+      icon: Github,
     },
   };
 
   const selected = content[variant];
 
   return (
-    <Card className={`${selected.color} p-8 relative overflow-hidden min-h-[400px] flex flex-col justify-between`}>
-      <div className="space-y-6">
-        <div className="text-sm font-medium tracking-wider text-gray-700">
-          {selected.heading}
+    <Card className={`${selected.color} p-8 relative overflow-hidden min-h-[600px] flex flex-col justify-between`}>
+      <div className="space-y-8">
+        <div className="flex items-start justify-between">
+          <img 
+            src="/lovable-uploads/207d3f1c-58b3-4244-85de-55101fc15c3e.png" 
+            alt="VizGenie Logo" 
+            className="h-8 object-contain"
+          />
+          <div className="text-sm font-medium text-gray-700">
+            {selected.platform}
+          </div>
         </div>
-        <h2 className="text-3xl font-bold text-gray-900 max-w-[200px] leading-tight">
-          {selected.subheading}
-        </h2>
-        <p className="text-gray-700">{selected.description}</p>
+        <div className="space-y-4">
+          <h2 className="text-4xl font-bold text-gray-900 leading-tight">
+            {selected.tagline}
+          </h2>
+          <p className="text-gray-700 text-lg">{selected.description}</p>
+        </div>
       </div>
-      <div className="flex items-center justify-between mt-8">
-        <selected.icon className="w-8 h-8 text-gray-700" />
-        <ArrowRight className="w-6 h-6 text-gray-700" />
-      </div>
+      <selected.icon className="w-12 h-12 text-gray-700 opacity-80" />
     </Card>
   );
 };
