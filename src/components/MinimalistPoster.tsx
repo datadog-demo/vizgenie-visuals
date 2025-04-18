@@ -1,6 +1,7 @@
 
 import { Github, Rocket } from "lucide-react";
 import { Card } from "./ui/card";
+import { Button } from "./ui/button";
 
 const MinimalistPoster = ({ variant }: { variant: 1 | 2 }) => {
   const content = {
@@ -11,6 +12,9 @@ const MinimalistPoster = ({ variant }: { variant: 1 | 2 }) => {
       description: "Transform natural language to Grafana dashboards",
       color: "bg-[#FDE1D3]",
       icon: Rocket,
+      link: "https://www.producthunt.com/vizgenie",
+      features: ["Natural Language Input", "Auto Dashboard Creation", "AI-Powered"],
+      launched: "April 18, 2025",
     },
     2: {
       platform: "GitHub",
@@ -19,6 +23,9 @@ const MinimalistPoster = ({ variant }: { variant: 1 | 2 }) => {
       description: "AI-powered Grafana visualization tool",
       color: "bg-[#E5DEFF]",
       icon: Github,
+      link: "https://github.com/vizgenie",
+      features: ["Prometheus Support", "Extensible Architecture", "Multi-Source"],
+      launched: "April 18, 2025",
     },
   };
 
@@ -42,9 +49,28 @@ const MinimalistPoster = ({ variant }: { variant: 1 | 2 }) => {
             {selected.tagline}
           </h2>
           <p className="text-gray-700 text-lg">{selected.description}</p>
+          <ul className="space-y-2 mt-6">
+            {selected.features.map((feature, index) => (
+              <li key={index} className="text-gray-700 text-sm flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-gray-700 rounded-full" />
+                {feature}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
-      <selected.icon className="w-12 h-12 text-gray-700 opacity-80" />
+      <div className="space-y-4">
+        <p className="text-sm text-gray-700">Published on {selected.launched}</p>
+        <a 
+          href={selected.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-gray-700 hover:text-gray-900"
+        >
+          <selected.icon className="w-6 h-6" />
+          <span className="text-sm font-medium">View on {selected.platform}</span>
+        </a>
+      </div>
     </Card>
   );
 };
